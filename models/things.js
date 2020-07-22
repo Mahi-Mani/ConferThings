@@ -1,11 +1,17 @@
 // Export Things Table
 module.exports = function (sequelize, DataTypes) {
     var Things = sequelize.define("Things", {
-        thingName: DataTypes.string,
-        thingDesc: DataTypes.string,
-        availableDate: DataTypes.date,
-        location: DataTypes.string
+        thingName: DataTypes.STRING,
+        thingDesc: DataTypes.STRING,
+        availableDate: DataTypes.DATE,
+        location: DataTypes.STRING
     });
+
+    Things.associate = function (models) {
+        models.Things.hasOne(models.Rent, {
+            onDelete: "CASCADE"
+        });
+    };
 
     Things.associate = function (models) {
         models.Things.belongsTo(models.User, {
@@ -15,6 +21,5 @@ module.exports = function (sequelize, DataTypes) {
         });
     };
 
-    // Think about hasOne relationship
     return Things;
 }
