@@ -12,3 +12,5 @@ router.route(":userId")
 // Matches with `/api/things/:thingId`
 router.route("/:thingId")
     .get(thingController.getDetailsOfThings);
+
+module.exports = router;

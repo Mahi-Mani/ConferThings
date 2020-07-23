@@ -8,3 +8,5 @@ router.route("/")
 // Matches with `/api/rent/:userId`
 router.route("/:userId")
     .get(rentController.getAllRentedByUser);
+
+module.exports = router;
