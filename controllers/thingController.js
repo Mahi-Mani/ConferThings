@@ -26,7 +26,7 @@ module.exports = {
     getDetailsOfThings: (req, res) => {
         db.Things.findAll({
             where: {
-                thingId: req.params.thingId
+                id: req.params.thingId
             }
         }).then(result => {
             res.json(result);

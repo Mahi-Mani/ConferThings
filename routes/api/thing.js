@@ -5,12 +5,12 @@ const thingController = require("../../controllers/thingController");
 router.route("/")
     .get(thingController.findAll);
 
-// Matches with `/api/things/:userId`
-router.route(":userId")
+// Matches with `/api/thing/user/:userId`
+router.route("/user/:userId")
     .get(thingController.findBelongingsOfUser);
 
-// Matches with `/api/things/:thingId`
-router.route("/:thingId")
+// Matches with `/api/thing/thing/:thingId`
+router.route("/thing/:thingId")
     .get(thingController.getDetailsOfThings);
 
 module.exports = router;
