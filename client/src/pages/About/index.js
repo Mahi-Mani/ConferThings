@@ -1,7 +1,7 @@
 import React from "react";
 import aboutImage from "../../assets/images/bg1.jpg";
-import Navbar from "../Navbar";
-import Content from "../Content";
+import Navbar from "../../components/Navbar";
+import Content from "../../components/Content";
 
 function About() {
     const aboutStyle = {
