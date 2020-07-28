@@ -15,7 +15,10 @@ function Modal({ id, login, signUp }) {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <Form />
+                                <Form
+                                    login={login}
+                                    signUp={signUp}
+                                />
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
@@ -34,7 +37,10 @@ function Modal({ id, login, signUp }) {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                {/* <Form /> */}
+                                <Form
+                                    login={login}
+                                    signUp={signUp}
+                                />
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
