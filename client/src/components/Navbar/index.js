@@ -2,13 +2,6 @@ import React, { Component } from "react";
 import Modal from "../Modal";
 
 class Navbar extends Component {
-    state = {
-        show: false
-    }
-
-    handleSignUp = (event) => {
-        event.preventDefault();
-    };
 
     render() {
         const navStyle = {

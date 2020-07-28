@@ -9,5 +9,15 @@ module.exports = {
             }).catch(err => {
                 console.log("Error", err);
             })
+    },
+    createUser: (req, res) => {
+        console.log("Create user details", req.body);
+        db.User.create(req.body)
+            .then(result => {
+                res.json(result);
+            }).catch(err => {
+                console.log("Error", err);
+                res.json(err);
+            })
     }
 }
