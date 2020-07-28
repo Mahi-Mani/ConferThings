@@ -2,6 +2,26 @@ import React, { Component } from "react";
 import Modal from "../Modal";
 
 class Navbar extends Component {
+    state = {
+        signUp: false,
+        login: false
+    }
+
+    handleSignUp = (event) => {
+        event.preventDefault();
+        this.setState({
+            signUp: true,
+            login: false
+        });
+    }
+
+    handleLogin = (event) => {
+        event.preventDefault();
+        this.setState({
+            login: true,
+            signUp: false
+        });
+    }
 
     render() {
         const navStyle = {
@@ -29,13 +49,17 @@ class Navbar extends Component {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item mr-3">
                             <a style={headingStyle}
+                                onClick={(e) => this.handleSignUp(e)}
                                 data-toggle="modal"
                                 data-target="#exampleModalCenter"><span className="glyphicon glyphicon-user"
                                 ></span> Sign Up</a>
                         </li>
                         <li className="nav-item ml-5">
-                            <a href="#" style={headingStyle}><span className="glyphicon glyphicon-log-in"
-                            ></span> Login</a>
+                            <a style={headingStyle}
+                                onClick={(e) => this.handleLogin(e)}
+                                data-toggle="modal"
+                                data-target="#exampleModalCenter"><span className="glyphicon glyphicon-log-in"
+                                ></span> Login</a>
                         </li>
                         {/* <li className="nav-item">
                              Your Things
@@ -47,6 +71,8 @@ class Navbar extends Component {
                 </nav>
                 <Modal
                     id={"exampleModalCenter"}
+                    login={this.state.login}
+                    signUp={this.state.signUp}
                 />
             </div>
         )
