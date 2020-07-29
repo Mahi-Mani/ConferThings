@@ -29,4 +29,26 @@ router.post("/", (req, res, next) => {
     })(req, res, next);
 })
 
+router.post("/login", (req, res, next) => {
+    passport.authenticate("local-login", (err, user) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            returnData = {
+                message: "User not found",
+                color: 'red'
+            }
+            res.json(returnData)
+        } else {
+            returnData = {
+                message: "User successfully logged in",
+                color: "green"
+            }
+
+            return res.json(returnData)
+        }
+    })(req, res, next)
+})
+
 module.exports = router;
