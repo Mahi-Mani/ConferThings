@@ -1,12 +1,18 @@
 const express = require("express");
 const routes = require("./routes");
+const passport = require("passport");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+require("./config/passport")(passport);
 app.use(express.static("public"));
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
