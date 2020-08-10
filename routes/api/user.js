@@ -43,10 +43,10 @@ router.post("/login", (req, res, next) => {
         } else {
             returnData = {
                 message: "User successfully logged in",
-                color: "green"
+                color: "green",
+                email: user.dataValues.email
             }
-
-            return res.json(returnData)
+            return res.json(returnData);
         }
     })(req, res, next)
 })

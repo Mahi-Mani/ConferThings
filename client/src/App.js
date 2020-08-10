@@ -4,6 +4,8 @@ import './App.css';
 import About from "./pages/About";
 
 function App() {
+  const user = window.localStorage.getItem("user");
+  console.log("User email from storage", user);
   return (
     <BrowserRouter>
       <Switch>

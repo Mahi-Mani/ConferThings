@@ -39,14 +39,14 @@ class Form extends Component {
 
     handleLogin = (event) => {
         event.preventDefault();
-        console.log("LOgin email", this.state.email);
-        console.log("Login password", this.state.password);
         const loginDetails = {
             email: this.state.email,
             password: this.state.password
         }
         API.login(loginDetails).then(result => {
-            console.log("Logged in : ", result);
+            if (result.data.message === "User successfully logged in") {
+                window.localStorage.setItem("user", result.data.email);
+            }
         })
     }
 
