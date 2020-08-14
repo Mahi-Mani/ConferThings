@@ -23,7 +23,14 @@ class Navbar extends Component {
         });
     }
 
+    handleLogout = (event) => {
+        event.preventDefault();
+        localStorage.clear();
+        window.location.href = "/";
+    }
+
     render() {
+        const user = localStorage.getItem("user");
         const navStyle = {
             backgroundColor: "black",
             height: "10%"
@@ -44,36 +51,57 @@ class Navbar extends Component {
         return (
             <div>
                 {/* Change the navbar later depeding upon authentication procedure */}
-                <nav className="navbar navbar-expand-sm" style={navStyle}>
-                    <a className="navbar-brand" href="#" style={titleStyle}>CONFER THINGS</a>
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item mr-3">
-                            <a style={headingStyle}
-                                onClick={(e) => this.handleSignUp(e)}
-                                data-toggle="modal"
-                                data-target="#exampleModalCenter"><span className="glyphicon glyphicon-user"
-                                ></span> Sign Up</a>
-                        </li>
-                        <li className="nav-item ml-5">
-                            <a style={headingStyle}
-                                onClick={(e) => this.handleLogin(e)}
-                                data-toggle="modal"
-                                data-target="#exampleModalCenter"><span className="glyphicon glyphicon-log-in"
-                                ></span> Login</a>
-                        </li>
-                        {/* <li className="nav-item">
+                {!user ?
+                    <nav className="navbar navbar-expand-sm" style={navStyle}>
+                        <a className="navbar-brand" href="#" style={titleStyle}>CONFER THINGS</a>
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item mr-3">
+                                <a style={headingStyle}
+                                    onClick={(e) => this.handleSignUp(e)}
+                                    data-toggle="modal"
+                                    data-target="#exampleModalCenter"><span className="glyphicon glyphicon-user"
+                                    ></span> Sign Up</a>
+                            </li>
+                            <li className="nav-item ml-5">
+                                <a style={headingStyle}
+                                    onClick={(e) => this.handleLogin(e)}
+                                    data-toggle="modal"
+                                    data-target="#exampleModalCenter"><span className="glyphicon glyphicon-log-in"
+                                    ></span> Login</a>
+                            </li>
+                            {/* <li className="nav-item">
                              Your Things
                          </li>
                          <li className="nav-item">
                              Rent It
                        </li> */}
-                    </ul>
-                </nav>
-                <Modal
-                    id={"exampleModalCenter"}
-                    login={this.state.login}
-                    signUp={this.state.signUp}
-                />
+                        </ul>
+                        <Modal
+                            id={"exampleModalCenter"}
+                            login={this.state.login}
+                            signUp={this.state.signUp}
+                        />
+                    </nav>
+                    :
+                    <nav className="navbar navbar-expand-sm" style={navStyle}>
+                        <a className="navbar-brand" href="#" style={titleStyle}>CONFER THINGS</a>
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item ml-5">
+                                <a style={headingStyle}
+                                    onClick={(e) => this.handleLogout(e)}
+                                    data-toggle="modal"
+                                    data-target="#exampleModalCenter"><span className="glyphicon glyphicon-log-out"
+                                    ></span> Logout</a>
+                            </li>
+                            {/* <li className="nav-item">
+                             Your Things
+                         </li>
+                         <li className="nav-item">
+                             Rent It
+                       </li> */}
+                        </ul>
+                    </nav>
+                }
             </div>
         )
     }

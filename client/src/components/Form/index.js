@@ -47,6 +47,7 @@ class Form extends Component {
             if (result.data.message === "User successfully logged in") {
                 window.localStorage.setItem("user", result.data.email);
             }
+            window.location.href = "/home";
         })
     }
 
