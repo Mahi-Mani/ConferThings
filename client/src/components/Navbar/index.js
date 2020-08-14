@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Modal from "../Modal";
+import API from "../../utils/API";
 
 class Navbar extends Component {
     state = {
@@ -25,8 +26,11 @@ class Navbar extends Component {
 
     handleLogout = (event) => {
         event.preventDefault();
-        localStorage.clear();
-        window.location.href = "/";
+        API.logout()
+            .then(result => {
+                localStorage.clear();
+                window.location.href="/";
+            });
     }
 
     render() {

@@ -6,5 +6,8 @@ export default {
     },
     login: function (login) {
         return axios.post("/api/user/login", login);
+    },
+    logout: function () {
+        return axios.get("/api/user/logout");
     }
 };

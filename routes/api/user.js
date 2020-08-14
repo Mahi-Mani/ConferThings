@@ -51,4 +51,14 @@ router.post("/login", (req, res, next) => {
     })(req, res, next)
 })
 
+router.get("/logout", (req, res) => {
+
+    req.logout();
+    if(!req.user) {
+        return res.redirect('/');
+    } else {
+        console.log("Logout failed");
+    }
+})
+
 module.exports = router;
