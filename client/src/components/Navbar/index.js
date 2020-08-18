@@ -29,7 +29,7 @@ class Navbar extends Component {
         API.logout()
             .then(result => {
                 localStorage.clear();
-                window.location.href="/";
+                window.location.href = "/";
             });
     }
 
@@ -90,6 +90,14 @@ class Navbar extends Component {
                     <nav className="navbar navbar-expand-sm" style={navStyle}>
                         <a className="navbar-brand" href="#" style={titleStyle}>CONFER THINGS</a>
                         <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <a style={headingStyle}
+                                    href="/home">Home</a>
+                            </li>
+                            <li className="nav-item ml-5">
+                                <a style={headingStyle}
+                                href="/yourThings">Your Things</a>
+                            </li>
                             <li className="nav-item ml-5">
                                 <a style={headingStyle}
                                     onClick={(e) => this.handleLogout(e)}

@@ -102,7 +102,8 @@ class Form extends Component {
                                 onChange={this.handleInputChange} />
                         </div>
                         <button type="submit" className="btn btn-primary"
-                            onClick={this.handleSignUp}>CREATE</button>
+                            onClick={this.handleSignUp}
+                            data-dismiss="modal">CREATE</button>
                     </form>
                     :
                     <form>
@@ -124,7 +125,8 @@ class Form extends Component {
                                 onChange={this.handleInputChange} />
                         </div>
                         <button type="submit" className="btn btn-primary"
-                            onClick={this.handleLogin}>LOGIN</button>
+                            onClick={this.handleLogin}
+                            data-dismiss="modal">LOGIN</button>
                     </form>
                 }
             </>
