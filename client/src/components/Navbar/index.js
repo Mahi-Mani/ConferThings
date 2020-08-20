@@ -84,6 +84,7 @@ class Navbar extends Component {
                             id={"exampleModalCenter"}
                             login={this.state.login}
                             signUp={this.state.signUp}
+                            newItem={false}
                         />
                     </nav>
                     :
@@ -92,18 +93,19 @@ class Navbar extends Component {
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
                                 <a style={headingStyle}
-                                    href="/home">Home</a>
+                                    href="/home"
+                                >Home</a>
                             </li>
                             <li className="nav-item ml-5">
                                 <a style={headingStyle}
-                                href="/yourThings">Your Things</a>
+                                    href="/yourThings"
+                                >Your Things</a>
                             </li>
                             <li className="nav-item ml-5">
                                 <a style={headingStyle}
                                     onClick={(e) => this.handleLogout(e)}
-                                    data-toggle="modal"
-                                    data-target="#exampleModalCenter"><span className="glyphicon glyphicon-log-out"
-                                    ></span> Logout</a>
+                                ><span className="glyphicon glyphicon-log-out"
+                                ></span> Logout</a>
                             </li>
                             {/* <li className="nav-item">
                              Your Things

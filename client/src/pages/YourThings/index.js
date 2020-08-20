@@ -4,7 +4,7 @@ import Modal from "../../components/Modal";
 
 class YourThings extends Component {
     state = {
-        render: false
+        render: true
     }
 
     addAnItem = event => {
@@ -20,18 +20,21 @@ class YourThings extends Component {
             <>
                 <Navbar />
 No Items Yet! Add a new item!
-                < button type="button" class="btn btn-info"
-                    onClick={this.addAnItem} >
+                <a className="btn btn-info"
+                    onClick={(e) => this.addAnItem(e)}
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter">
                     <span className="glyphicon glyphicon-plus"
                     ></span>
-                </button >
-                {this.state.render &&
+                </a >
+                {/* {this.state.render && */}
                     <Modal
                         id={"exampleModalCenter"}
                         login={true}
-                        signUp={true}
+                        signUp={false}
+                        addItem={true}
                     />
-                }
+                {/* } */}
             </>
         );
     }

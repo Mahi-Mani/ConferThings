@@ -1,6 +1,17 @@
 const db = require("../models");
 
 module.exports = {
+    // To insert into things table
+    create: (req, res) => {
+        console.log("***************BEFORE INSERTION*********");
+        db.Things.create(req.body)
+            .then(things => {
+                res.json(things);
+            }).catch(err => {
+                console.log("Error", err);
+                res.json(err);
+            })
+    },
     // To find all things
     findAll: (req, res) => {
         db.Things.findAll({})

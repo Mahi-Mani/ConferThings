@@ -1,8 +1,7 @@
 import React from "react";
 import Form from "../Form";
 
-function Modal({ id, login, signUp }) {
-    console.log("inside modal");
+function Modal({ id, login, signUp, addItem }) {
     return (
         <>
             {signUp ?
@@ -19,6 +18,7 @@ function Modal({ id, login, signUp }) {
                                 <Form
                                     login={login}
                                     signUp={signUp}
+                                    addItem={addItem}
                                 />
                             </div>
                             {/* <div className="modal-footer">
@@ -28,27 +28,55 @@ function Modal({ id, login, signUp }) {
                     </div>
                 </div>
                 :
-                <div className="modal fade" id={id} tabIndex="-1" role="dialog" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h3 className="modal-title" id="exampleModalLongTitle">LOGIN</h3>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                <Form
-                                    login={login}
-                                    signUp={signUp}
-                                />
-                            </div>
-                            {/* <div className="modal-footer">
+                <>
+                    {!addItem ?
+                        <div className="modal fade" id={id} tabIndex="-1" role="dialog" aria-hidden="true">
+                            <div className="modal-dialog modal-dialog-centered" role="document">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h3 className="modal-title" id="exampleModalLongTitle">LOGIN</h3>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <Form
+                                            login={login}
+                                            signUp={signUp}
+                                            addItem={addItem}
+                                        />
+                                    </div>
+                                    {/* <div className="modal-footer">
                                 <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
                             </div> */}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        :
+                        <div className="modal fade" id={id} tabIndex="-1" role="dialog" aria-hidden="true">
+                            <div className="modal-dialog modal-dialog-centered" role="document">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h3 className="modal-title" id="exampleModalLongTitle">ADD AN ITEM</h3>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <Form
+                                            login={login}
+                                            signUp={signUp}
+                                            addItem={addItem}
+                                        />
+                                    </div>
+                                    {/* <div className="modal-footer">
+                                <button type="button" className="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div> */}
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </>
             }
         </>
     );

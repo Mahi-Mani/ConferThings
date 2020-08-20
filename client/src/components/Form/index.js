@@ -5,7 +5,6 @@ class Form extends Component {
 
     constructor(props) {
         super(props);
-        console.log(props);
     }
 
     state = {
@@ -13,7 +12,11 @@ class Form extends Component {
         lastName: "",
         username: "",
         email: "",
-        password: ""
+        password: "",
+        location: "",
+        date: "",
+        desc: "",
+        itemName: ""
     }
 
     handleInputChange = (event) => {
@@ -46,8 +49,25 @@ class Form extends Component {
         API.login(loginDetails).then(result => {
             if (result.data.message === "User successfully logged in") {
                 window.localStorage.setItem("user", result.data.email);
+                window.localStorage.setItem("id", result.data.id);
             }
             window.location.href = "/home";
+        });
+    }
+
+    handleAddItem = (event) => {
+        event.preventDefault();
+        const id = localStorage.getItem("id");
+        const thingsDetails = {
+            thingName: this.state.itemName,
+            thingDesc: this.state.desc,
+            availableDate: this.state.date,
+            location: this.state.location,
+            UserId: id
+        }
+        API.createThings(thingsDetails).then(result => {
+            console.log(result);
+            console.log("Things inserted successfully");
         })
     }
 
@@ -106,28 +126,79 @@ class Form extends Component {
                             data-dismiss="modal">CREATE</button>
                     </form>
                     :
-                    <form>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email address</label>
-                            <input type="email" className="form-control"
-                                id="exampleInputEmail1"
-                                aria-describedby="emailHelp" placeholder="Enter email"
-                                name="email"
-                                value={this.state.email}
-                                onChange={this.handleInputChange} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <input type="password" className="form-control"
-                                id="exampleInputPassword1" placeholder="Password"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.handleInputChange} />
-                        </div>
-                        <button type="submit" className="btn btn-primary"
-                            onClick={this.handleLogin}
-                            data-dismiss="modal">LOGIN</button>
-                    </form>
+                    <>
+                        {this.props.addItem ?
+                            <form>
+                                <div className="form-group">
+                                    <label htmlFor="itemName">Item Name</label>
+                                    <input type="text" className="form-control"
+                                        id="itemName"
+                                        aria-describedby="emailHelp" placeholder="Enter Item Name"
+                                        name="itemName"
+                                        value={this.state.itemName}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="desc">Description</label>
+                                    <input type="text" className="form-control"
+                                        id="desc"
+                                        aria-describedby="emailHelp" placeholder="Enter Description"
+                                        name="desc"
+                                        value={this.state.desc}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="date">Available Date</label>
+                                    <input type="text" className="form-control"
+                                        id="date"
+                                        aria-describedby="emailHelp" placeholder="Available Date"
+                                        name="date"
+                                        value={this.state.date}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="location">Location</label>
+                                    <input type="location" className="form-control"
+                                        id="location"
+                                        aria-describedby="emailHelp" placeholder="Location"
+                                        name="location"
+                                        value={this.state.location}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary"
+                                    onClick={this.handleAddItem}
+                                // data-dismiss="modal"
+                                >ADD</button>
+                            </form>
+                            :
+                            <form>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">Email address</label>
+                                    <input type="email" className="form-control"
+                                        id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" placeholder="Enter email"
+                                        name="email"
+                                        value={this.state.email}
+                                        onChange={this.handleInputChange} />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword1">Password</label>
+                                    <input type="password" className="form-control"
+                                        id="exampleInputPassword1" placeholder="Password"
+                                        name="password"
+                                        value={this.state.password}
+                                        onChange={this.handleInputChange} />
+                                </div>
+                                <button type="submit" className="btn btn-primary"
+                                    onClick={this.handleLogin}
+                                    data-dismiss="modal">LOGIN</button>
+                            </form>
+                        }
+                    </>
                 }
             </>
         );
@@ -135,3 +206,8 @@ class Form extends Component {
 }
 
 export default Form;
+
+{/* <button type="submit" className="btn btn-primary"
+                                    onClick={(event) => this.add(event)}
+                                // data-dismiss="modal"
+                                >ADD</button> */}

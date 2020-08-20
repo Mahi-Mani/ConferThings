@@ -9,5 +9,8 @@ export default {
     },
     logout: function () {
         return axios.get("/api/user/logout");
+    },
+    createThings: function (thingsDetails) {
+        return axios.post("/api/thing", thingsDetails);
     }
 };
