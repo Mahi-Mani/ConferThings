@@ -215,11 +215,11 @@ class Form extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
-                                <input type="file" id="img" name="img" accept="image/*"
+                                {/* <input type="file" id="img" name="img" accept="image/*"
                                     name="image"
                                     // value={this.state.image}
                                     onChange={this.handleImage}
-                                ></input>
+                                ></input> */}
                                 <button type="submit" className="btn btn-primary"
                                     onClick={this.handleAddItem}
                                     data-dismiss="modal"
