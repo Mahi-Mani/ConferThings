@@ -16,13 +16,24 @@ class Form extends Component {
         location: "",
         date: "",
         desc: "",
-        itemName: ""
+        itemName: "",
+        image: ""
     }
 
     handleInputChange = (event) => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
+        });
+    }
+
+    handleImage = (event) => {
+        console.log("Inside handle image function");
+        // console.log(event);
+        console.log(event.target);
+        // getBase64(event.target.files[0]).then(file =>
+        this.setState({
+            image: event.target.files[0].name
         });
     }
 
@@ -58,6 +69,7 @@ class Form extends Component {
     handleAddItem = (event) => {
         event.preventDefault();
         const id = localStorage.getItem("id");
+        console.log("Image file", this.state.image);
         const thingsDetails = {
             thingName: this.state.itemName,
             thingDesc: this.state.desc,
@@ -127,7 +139,30 @@ class Form extends Component {
                     </form>
                     :
                     <>
-                        {this.props.addItem ?
+                        {!this.props.addItem ?
+                            <form>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">Email address</label>
+                                    <input type="email" className="form-control"
+                                        id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" placeholder="Enter email"
+                                        name="email"
+                                        value={this.state.email}
+                                        onChange={this.handleInputChange} />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword1">Password</label>
+                                    <input type="password" className="form-control"
+                                        id="exampleInputPassword1" placeholder="Password"
+                                        name="password"
+                                        value={this.state.password}
+                                        onChange={this.handleInputChange} />
+                                </div>
+                                <button type="submit" className="btn btn-primary"
+                                    onClick={this.handleLogin}
+                                    data-dismiss="modal">LOGIN</button>
+                            </form>
+                            :
                             <form>
                                 <div className="form-group">
                                     <label htmlFor="itemName">Item Name</label>
@@ -169,45 +204,23 @@ class Form extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
+                                <input type="file" id="img" name="img" accept="image/*"
+                                    name="image"
+                                    // value={this.state.image}
+                                    onChange={this.handleImage}
+                                ></input>
                                 <button type="submit" className="btn btn-primary"
                                     onClick={this.handleAddItem}
-                                // data-dismiss="modal"
+                                    data-dismiss="modal"
                                 >ADD</button>
-                            </form>
-                            :
-                            <form>
-                                <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Email address</label>
-                                    <input type="email" className="form-control"
-                                        id="exampleInputEmail1"
-                                        aria-describedby="emailHelp" placeholder="Enter email"
-                                        name="email"
-                                        value={this.state.email}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="exampleInputPassword1">Password</label>
-                                    <input type="password" className="form-control"
-                                        id="exampleInputPassword1" placeholder="Password"
-                                        name="password"
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                                <button type="submit" className="btn btn-primary"
-                                    onClick={this.handleLogin}
-                                    data-dismiss="modal">LOGIN</button>
                             </form>
                         }
                     </>
                 }
+                <img src={this.state.image} alt="check"></img>
             </>
         );
     }
 }
 
 export default Form;
-
-{/* <button type="submit" className="btn btn-primary"
-                                    onClick={(event) => this.add(event)}
-                                // data-dismiss="modal"
-                                >ADD</button> */}

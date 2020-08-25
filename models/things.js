@@ -4,7 +4,8 @@ module.exports = function (sequelize, DataTypes) {
         thingName: DataTypes.STRING,
         thingDesc: DataTypes.STRING,
         availableDate: DataTypes.DATE,
-        location: DataTypes.STRING
+        location: DataTypes.STRING,
+        image: DataTypes.STRING
     });
 
     Things.associate = function (models) {

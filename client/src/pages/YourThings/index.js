@@ -1,10 +1,26 @@
 import React, { Component } from "react";
 import Navbar from "../../components/Navbar";
 import Modal from "../../components/Modal";
+import API from "../../utils/API";
+import Details from "../../components/Details";
 
 class YourThings extends Component {
     state = {
-        render: true
+        render: true,
+        userThings: [],
+        hasFetched: false
+    }
+
+    componentDidMount() {
+        const id = window.localStorage.getItem("id");
+        API.getThingsOfUser(id).then(result => {
+            console.log("All things of user", result);
+            this.setState({
+                userThings: result.data,
+                hasFetched: true
+            });
+            console.log("userThings", this.state.userThings);
+        });
     }
 
     addAnItem = event => {
@@ -19,7 +35,22 @@ class YourThings extends Component {
         return (
             <>
                 <Navbar />
-No Items Yet! Add a new item!
+                <>
+                    {
+                        this.state.hasFetched ?
+                            <>
+                                {this.state.userThings.length == 0 ?
+                                    `No Items Yet! Add a new item!`
+                                    :
+                                    <Details
+                                        userThings={this.state.userThings}
+                                    />
+                                }
+                            </>
+                            :
+                            `Loading...`
+                    }
+                </>
                 <a className="btn btn-info"
                     onClick={(e) => this.addAnItem(e)}
                     data-toggle="modal"
@@ -27,14 +58,12 @@ No Items Yet! Add a new item!
                     <span className="glyphicon glyphicon-plus"
                     ></span>
                 </a >
-                {/* {this.state.render && */}
-                    <Modal
-                        id={"exampleModalCenter"}
-                        login={true}
-                        signUp={false}
-                        addItem={true}
-                    />
-                {/* } */}
+                <Modal
+                    id={"exampleModalCenter"}
+                    login={true}
+                    signUp={false}
+                    addItem={true}
+                />
             </>
         );
     }

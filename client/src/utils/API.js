@@ -12,5 +12,8 @@ export default {
     },
     createThings: function (thingsDetails) {
         return axios.post("/api/thing", thingsDetails);
+    },
+    getThingsOfUser: function(id) {
+        return axios.get("/api/thing/user/" + id);
     }
 };
