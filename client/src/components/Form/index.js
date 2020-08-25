@@ -69,12 +69,13 @@ class Form extends Component {
     handleAddItem = (event) => {
         event.preventDefault();
         const id = localStorage.getItem("id");
-        console.log("Image file", this.state.image);
+        // console.log("Image file", this.state.image);
         const thingsDetails = {
             thingName: this.state.itemName,
             thingDesc: this.state.desc,
             availableDate: this.state.date,
             location: this.state.location,
+            image: this.state.image,
             UserId: id
         }
         API.createThings(thingsDetails).then(result => {
@@ -196,11 +197,21 @@ class Form extends Component {
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="location">Location</label>
-                                    <input type="location" className="form-control"
+                                    <input type="text" className="form-control"
                                         id="location"
                                         aria-describedby="emailHelp" placeholder="Location"
                                         name="location"
                                         value={this.state.location}
+                                        onChange={this.handleInputChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="image">Image URL</label>
+                                    <input type="text" className="form-control"
+                                        id="image"
+                                        aria-describedby="emailHelp" placeholder="Image"
+                                        name="image"
+                                        value={this.state.image}
                                         onChange={this.handleInputChange}
                                     />
                                 </div>
