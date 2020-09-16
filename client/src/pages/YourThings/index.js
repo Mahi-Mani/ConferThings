@@ -12,6 +12,10 @@ class YourThings extends Component {
     }
 
     componentDidMount() {
+        this.loadThings();
+    }
+
+    loadThings = () => {
         const id = window.localStorage.getItem("id");
         API.getThingsOfUser(id).then(result => {
             console.log("All things of user", result);
@@ -26,10 +30,13 @@ class YourThings extends Component {
     addAnItem = event => {
         event.preventDefault();
         console.log("Inside add an item");
-        this.setState({
-            render: !this.state.render
-        });
     }
+
+    // renderFunc = () => {
+    //     this.setState({
+    //         render: !this.state.render
+    //     });
+    // }
 
     render() {
         return (
@@ -51,18 +58,26 @@ class YourThings extends Component {
                             `Loading...`
                     }
                 </>
-                <a className="btn btn-info"
-                    onClick={(e) => this.addAnItem(e)}
-                    data-toggle="modal"
-                    data-target="#exampleModalCenter">
-                    <span className="glyphicon glyphicon-plus"
-                    ></span>
-                </a >
+                <div className="row">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-8">
+                        Add More Items!
+                <a className="btn btn-info m-5"
+                            onClick={(e) => this.addAnItem(e)}
+                            data-toggle="modal"
+                            data-target="#exampleModalCenter">
+                            <span className="glyphicon glyphicon-plus"
+                            ></span>
+                        </a >
+                    </div>
+                    <div className="col-md-2"></div>
+                </div>
                 <Modal
                     id={"exampleModalCenter"}
                     login={true}
                     signUp={false}
                     addItem={true}
+                    loadThings={this.loadThings}
                 />
             </>
         );

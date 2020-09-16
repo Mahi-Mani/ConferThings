@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "../Form";
 
-function Modal({ id, login, signUp, addItem }) {
+function Modal({ id, login, signUp, addItem, loadThings }) {
     return (
         <>
             {signUp ?
@@ -44,6 +44,7 @@ function Modal({ id, login, signUp, addItem }) {
                                             login={login}
                                             signUp={signUp}
                                             addItem={addItem}
+                                            loadThings={loadThings}
                                         />
                                     </div>
                                     {/* <div className="modal-footer">
@@ -67,6 +68,7 @@ function Modal({ id, login, signUp, addItem }) {
                                             login={login}
                                             signUp={signUp}
                                             addItem={addItem}
+                                            loadThings={loadThings}
                                         />
                                     </div>
                                     {/* <div className="modal-footer">

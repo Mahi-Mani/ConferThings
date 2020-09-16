@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
+import Details from "../Details";
 
 class Form extends Component {
 
@@ -17,7 +18,9 @@ class Form extends Component {
         date: "",
         desc: "",
         itemName: "",
-        image: ""
+        image: "",
+        render: false,
+        userThings: []
     }
 
     handleInputChange = (event) => {
@@ -46,9 +49,11 @@ class Form extends Component {
             email: this.state.email,
             password: this.state.password
         }
-        API.createUser(userDetails).then(result => {
-            console.log("Created User", result);
-        })
+        // API.createUser(userDetails).then(result => {
+        //     console.log("Created User", result);
+        // })
+        let response = API.createUser(userDetails);
+        console.log("Created User", response);
     }
 
     handleLogin = (event) => {
@@ -68,6 +73,8 @@ class Form extends Component {
 
     handleAddItem = (event) => {
         event.preventDefault();
+        console.log("Properties");
+        console.log(this.props);
         const id = localStorage.getItem("id");
         // console.log("Image file", this.state.image);
         const thingsDetails = {
@@ -81,6 +88,14 @@ class Form extends Component {
         API.createThings(thingsDetails).then(result => {
             console.log(result);
             console.log("Things inserted successfully");
+            API.getThingsOfUser(id).then(result => {
+                console.log("All things of user", result.data);
+                this.setState({
+                    userThings: result.data
+                    // render: !this.state.render
+                });
+                this.props.loadThings();
+            });
         })
     }
 
@@ -228,7 +243,7 @@ class Form extends Component {
                         }
                     </>
                 }
-                <img src={this.state.image} alt="check"></img>
+                {/* <img src={this.state.image} alt="check"></img> */}
             </>
         );
     }
