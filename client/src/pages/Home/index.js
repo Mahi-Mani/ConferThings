@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
 import QueryForm from "../../components/QueryForm";
+import AllThings from "../../components/AllThings";
 
 function Home() {
 
@@ -8,6 +9,7 @@ function Home() {
         <div>
             <Navbar />
             <QueryForm />
+            <AllThings />
         </div>
     );
 }
